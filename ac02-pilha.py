@@ -302,7 +302,7 @@ O que está na pilha, quando o algoritmo lê a letra "a"?
 
 Responda na variável pilha_balanceada1
 '''
-pilha_balanceada1=["(("]
+pilha_balanceada1=["(",'(','{']
 '''
 EXERCICIO
 
@@ -312,7 +312,7 @@ O que está na pilha, quando o algoritmo lê a letra "a"?
 
 Responda na variável pilha_balanceada2
 '''
-pilha_balanceada2=[""]
+pilha_balanceada2=["("]
 '''
 EXERCICIO
 
@@ -322,7 +322,7 @@ O que está na pilha, quando o algoritmo lê a letra "a"?
 
 Responda na variável pilha_balanceada3
 '''
-pilha_balanceada3=[""]
+pilha_balanceada3=["(","{"]
 
 '''
 EXERCICIO
@@ -341,11 +341,44 @@ Não precisa se preocupar com nenhum outro caractere
 
 
 def balanceada(string):
-    pass #outro pass pra vc tirar e escrever uma função
+    balanceada  = []
+    maior = 0 
+    lista_maior=[0]
+    conjunto=[{'abre':"(",'fecha':')'},{'abre':"{",'fecha':'}'},{'abre':"[",'fecha':']'},{'abre':"<",'fecha':'>'}]
+    for letra in string:
+        bale = False
+        if letra in ['(','[','{','<']:
+            balanceada.append(letra)
+            maior+=1
+            print(maior)
+            if maior > lista_maior[0]:
+                print(maior)
+                lista_maior[0]=maior
+                print(lista_maior)
+        if letra in [')',']','}','>']:
+            maior=0
+            if len(balanceada) == 0:
+                return False
+            for conj in conjunto:
+                print(balanceada)
+                if len(balanceada) == 0:
+                    break
+                if conj['abre'] == balanceada[-1] and letra == conj['fecha']:
+                    balanceada.pop()
+                    break
+    print('oi')
+    print(fotografa(lista_maior[0]))
+
+    
+
+    if len(balanceada) == 0:
+        return True
+    else:
+        return False
 '''
 EXERCICIO
 
-Podemos fazer alguns upgrades na funcao balanceada:
+Podemos fazer alguns upgrades na funcao balanceada:gi
     * Além de aceitar (, [ e {, queremos que ela aceite <, que será fechado com >
     * Se vier alguma letra/numero (ou qualquer outra coisa que nao seja (){}[]<> a funcao
     deve ignorar ao invés de dar pau
@@ -394,7 +427,25 @@ dicas:
     
 '''
 def palindromo(string):
-    return True
+        if len(string) % 2 ==0 :
+            subtring =list(string[:int(len(string)/2)])
+            for letra in string[int(len(string)/2):]:
+                 if letra == subtring[-1]:
+                     subtring.pop()
+        else:
+            subtring =list(string[:int((len(string)-1)/2)+1])
+            print(subtring[-1])
+            print(string[int((len(string)-1)/2):])
+            for letra in string[int((len(string)-1)/2):]:
+                if len(subtring) == 0:
+                    break
+                if letra == subtring[-1]:
+                     subtring.pop()
+        if len(subtring) == 0:
+            return True
+        else:
+            return False
+
 
 
 import unittest
